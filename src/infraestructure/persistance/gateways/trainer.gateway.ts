@@ -10,8 +10,8 @@ export class TrainerGateway {
     @InjectModel(Trainer.name) private trainerModel: Model<TrainerDocument>,
   ) {}
 
-  async findOne(trainer: TrainerDTO): Promise<TrainerDocument> {
-    return this.trainerModel.findOne({
+  async find(trainer: TrainerDTO): Promise<TrainerDocument[]> {
+    return this.trainerModel.find({
       ...trainer,
     });
   }
@@ -23,5 +23,10 @@ export class TrainerGateway {
   async create(trainer: TrainerDTO): Promise<TrainerDocument> {
     const model = new this.trainerModel(trainer);
     return model.save();
+  }
+
+  async filterByName(input: string): Promise<TrainerDocument[]> {
+    const regex = new RegExp(`^${input}`, 'g');
+    return this.trainerModel.find({ name: { $in: [regex] } });
   }
 }

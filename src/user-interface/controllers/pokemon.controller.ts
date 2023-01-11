@@ -5,7 +5,7 @@ import { GetPokesInteractor } from '../../application-core/pokemons/getPokes.int
 export class PokemonController {
   constructor(private readonly getPokes: GetPokesInteractor) {}
 
-  @Get('/v1/pokemons/list')
+  @Get('/v1/pokemons')
   async getPokemons() {
     return await this.getPokes.execute();
   }
