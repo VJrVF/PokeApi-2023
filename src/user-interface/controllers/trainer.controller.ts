@@ -32,7 +32,7 @@ export class TrainerController {
     return await this.findTrainer.execute(trainer);
   }
 
-  @Get('v1/trainers/filterByName')
+  @Post('v1/trainers/filterByName')
   async filterTrainers(@Body() input: inputDTO) {
     return await this.filterTrainer.execute(input);
   }
